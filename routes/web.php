@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\PagesController;
 use App\Http\Controllers\Frontend\PageController;
@@ -42,8 +43,20 @@ Route::get('/shop', [PageController::class, 'index'])->name('index');
     Route::get('/shop/products/categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/shop/products/category/{id}', [CategoriesController::class, 'show'])->name('categories.show');
 
-// User Routes
+
+
+// token Routes
 Route::get('/token/{token}', [VerificationController::class, 'verify'])->name('user.verification');
+
+// Users Route
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/dashboard', [UsersController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/profile', [UsersController::class, 'profile'])->name('user.profile');
+    Route::post('/profile', [UsersController::class, 'profileUpdate'])->name('user.profile.update');
+    Route::get('/logout', [UsersController::class, 'logout'])->name('user.logout');
+});
+
+
 
 // Product Routes
 Route::group(['prefix' => 'admin'], function () {
