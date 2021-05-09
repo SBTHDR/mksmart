@@ -1,0 +1,20 @@
+.bg-light {
+    background-color: #fdd670 !important;
+}
+
+.bg-warning {
+  background-color: #fdd670 !important;
+}
+
+a {
+  text-decoration: none;
+  color: #242424;
+}
+
+.mtf {
+  margin-top: 15rem!important;
+}
+
+.mtfr {
+  margin-top: 10rem!important;
+}
