@@ -30,4 +30,37 @@ class UsersController extends Controller
         $user = Auth::user();
         return view('frontend.pages.users.profile', compact('user', 'divisions', 'districts'));
     }
+
+    public function profileUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $this->validate($request, [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'username' => ['required', 'alpha_dash', 'max:255', 'unique:users,username,' . $user->id],
+            'phone_no' => ['required', 'unique:users,phone_no,' . $user->id],
+            'division_id' => ['required', 'numeric'],
+            'district_id' => ['required', 'numeric'],
+            'street_address' => ['required'],
+        ]);
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone_no = $request->phone_no;
+        $user->division_id = $request->division_id;
+        $user->district_id = $request->district_id;
+        $user->street_address = $request->street_address;
+        $user->shipping_address = $request->shipping_address;
+        $user->ip_address = request()->ip();
+
+        $user->save();
+
+        session()->flash('success', 'Your profile has been updated successfully!');
+
+        return back();
+    }
 }
