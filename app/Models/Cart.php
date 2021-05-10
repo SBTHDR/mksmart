@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Cart extends Model
 {
@@ -32,8 +33,23 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function totalItems()
+    public static function totalItems()
     {
+        if (Auth::check()) {
+            $carts = Cart::orWhere('user_id', Auth::id())
+                ->orWhere('ip_address', request()->ip())
+                ->get();
+        } else {
+            $carts = Cart::orWhere('ip_address', request()->ip())->get();
+        }
+
+        $total_item = 0;
+
+        foreach ($carts as $cart) {
+            $total_item += $cart->product_quantity;
+        }
+
+        return $total_item;
 
     }
 

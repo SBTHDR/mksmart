@@ -26,16 +26,17 @@
                 </li>
 
             </ul>
-            <form class="d-flex mx-3">
-                <div style="cursor:poin">
-                  <i class="fas fa-cart-plus"></i><strong>Cart</strong>
-                </div>
-            </form>
-            {{-- <form class="d-flex">
-                <div style="cursor:poin">
-                  <i class="fas fa-user"></i><strong>user</strong>
-                </div>
-            </form> --}}
+
+            {{-- Cart icon --}}
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a href="{{ route('carts') }}" class="nav-link">
+                        <i class="fa fa-cart-plus"></i><span class="badge bg-danger">
+                            {{ App\Models\Cart::totalItems() }}
+                        </span>
+                    </a>
+                </li>
+            </ul>
 
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->

@@ -20,10 +20,15 @@ class CartsController extends Controller
            'product_id' => 'required',
         ]);
 
-        $cart = Cart::orWhere('user_id', Auth::id())
-                    ->orWhere('ip_address', request()->ip())
-                    ->where('product_id', $request->product_id)
-                    ->first();
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::id())
+                ->where('product_id', $request->product_id)
+                ->first();
+        } else {
+            $cart = Cart::where('ip_address', request()->ip())
+                ->where('product_id', $request->product_id)
+                ->first();
+        }
 
         if (!is_null($cart)) {
             $cart->increment('product_quantity');
