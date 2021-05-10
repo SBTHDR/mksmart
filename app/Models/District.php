@@ -9,6 +9,11 @@ class District extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'name',
+        'division_id',
+    ];
+
     public function division($value='')
     {
       return $this->belongsTo(Division::class);

@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CategoriesController;
 use App\Http\Controllers\Backend\DivisionsController;
 use App\Http\Controllers\Backend\DistrictsController;
 use App\Http\Controllers\Frontend\VerificationController;
+use App\Http\Controllers\Frontend\CartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,11 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/logout', [UsersController::class, 'logout'])->name('user.logout');
 });
 
+// Carts Route
+Route::group(['prefix' => 'carts'], function () {
+    Route::get('/', [CartsController::class, 'index'])->name('carts');
+    Route::post('/store', [CartsController::class, 'store'])->name('carts.store');
+});
 
 
 // Product Routes

@@ -17,7 +17,7 @@
                     <a href="{{ route('products.show', $product->slug) }}">{{ $product->title }}</a>
                   </h5>
                   <p class="card-text">{{ $product->price }} টাকা</p>
-                  <a href="#" class="btn btn-outline-primary">Add to cart</a>
+                  @include('frontend.pages.product.partials.cart-button')
               </div>
           </div>
       </div>
