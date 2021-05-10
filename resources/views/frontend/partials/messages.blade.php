@@ -18,3 +18,9 @@
         {{ Session::get('errors') }}
     </div>
 @endif
+
+@if(Session::has('login_errors'))
+    <div class="alert alert-danger">
+        {{ Session::get('login_errors') }}
+    </div>
+@endif
