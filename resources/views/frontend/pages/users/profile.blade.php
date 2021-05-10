@@ -96,8 +96,24 @@
 
                         @error('street_address')
                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label for="shipping_address" class="col-md-4 col-form-label text-md-right">{{ __('Shipping Address') }} <span class="text-muted">(Optional)</span> </label>
+
+                    <div class="col-md-6">
+                        <textarea id="shipping_address" class="form-control @error('shipping_address') is-invalid @enderror" name="shipping_address" autocomplete="shipping_address">
+                            {{ $user->shipping_address }}
+                        </textarea>
+
+                        @error('shipping_address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                 </div>
