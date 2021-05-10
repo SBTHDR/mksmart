@@ -8,6 +8,7 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -55,6 +56,11 @@ class UsersController extends Controller
         $user->district_id = $request->district_id;
         $user->street_address = $request->street_address;
         $user->shipping_address = $request->shipping_address;
+
+        if ($request->password != NULL || $request->password = "") {
+            $user->password = Hash::make($request->password);
+        }
+
         $user->ip_address = request()->ip();
 
         $user->save();
