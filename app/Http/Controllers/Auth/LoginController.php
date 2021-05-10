@@ -53,6 +53,9 @@ class LoginController extends Controller
         if ($user->status === 1) {
             if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
                 return redirect()->intended(route('index'));
+            } else {
+                session()->flash('login_errors', 'Invalid Email or password');
+                return back();
             }
         } else {
             if (!is_null($user)) {
@@ -61,7 +64,7 @@ class LoginController extends Controller
                 session()->flash('success', 'An email verification mail has been sent, please verify your email');
                 return redirect('/shop');
             } else {
-                session()->flash('errors', 'Please login first');
+                session()->flash('login_errors', 'Please login first');
                 return redirect()->route('login');
             }
         }
