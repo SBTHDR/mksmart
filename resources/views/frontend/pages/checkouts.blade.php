@@ -114,12 +114,63 @@
 
                         <div>
 
-                            <select name="payment_method_id" id="payment_method" class="form-control">
+                            <select name="payment_method_id" id="payment_method_id" class="form-control mb-2" style="cursor: pointer">
+
                                 <option value="">Please select a payment method</option>
                                 @foreach($payments as $payment)
-                                    <option value="{{ $payment->id }}">{{ $payment->name }}</option>
+                                    <option value="{{ $payment->short_name }}">{{ $payment->name }}</option>
                                 @endforeach
                             </select>
+
+
+                            @foreach($payments as $payment)
+
+                                @if($payment->short_name === "cash_on_delivery")
+                                    <div id="payment_{{ $payment->short_name }}" class="hidden mb-2">
+                                        <div class="alert alert-success">
+                                            <strong>Cash on Delivery confirmed! </strong> click Confirm Order button to complete payment
+                                        </div>
+                                    </div>
+                                @else
+                                    <div id="payment_{{ $payment->short_name }}" class="hidden mb-2">
+                                        <div class="border border-secondary p-2 mb-2">
+                                            <h3>{{ $payment->name }} Payment Details</h3>
+                                            <p>
+                                                <strong>{{ $payment->name }} A/C No: {{ $payment->no }}</strong>
+                                                <br>
+                                                <strong>A/C Type: {{ $payment->type }}</strong>
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-success">
+                                            <strong>Send money to the above A/C No. after that give the transaction id bellow, and </strong> click Confirm Order button to complete payment
+                                        </div>
+                                        <input type="text" name="transaction_id" class="form-control" placeholder="Enter transaction id">
+                                    </div>
+                                @endif
+
+                            @endforeach
+
+
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+                            <script type="text/javascript">
+                                $("#payment_method_id").change(function () {
+                                    $payment_method = $("#payment_method_id").val();
+
+                                    if ($payment_method === "cash_on_delivery") {
+                                        $("#payment_cash_on_delivery").removeClass('hidden');
+                                        $("#payment_bkash").addClass('hidden');
+                                        $("#payment_rocket").addClass('hidden');
+                                    }else if($payment_method === "bkash") {
+                                        $("#payment_bkash").removeClass('hidden');
+                                        $("#payment_cash_on_delivery").addClass('hidden');
+                                        $("#payment_rocket").addClass('hidden');
+                                    }else if($payment_method === "rocket") {
+                                        $("#payment_rocket").removeClass('hidden');
+                                        $("#payment_cash_on_delivery").addClass('hidden');
+                                        $("#payment_bkash").addClass('hidden');
+                                    }
+                                })
+                            </script>
 
                         </div>
                     </div>

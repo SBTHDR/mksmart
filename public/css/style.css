@@ -18,3 +18,7 @@ a {
 .mtfr {
   margin-top: 10rem!important;
 }
+
+.hidden {
+    display: none !important;
+}
