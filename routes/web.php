@@ -61,6 +61,8 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'carts'], function () {
     Route::get('/', [CartsController::class, 'index'])->name('carts');
     Route::post('/store', [CartsController::class, 'store'])->name('carts.store');
+    Route::post('/update/{id}', [CartsController::class, 'update'])->name('carts.update');
+    Route::post('/delete/{id}', [CartsController::class, 'destroy'])->name('carts.delete');
 });
 
 

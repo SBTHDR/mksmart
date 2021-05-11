@@ -31,7 +31,8 @@
             <ul class="navbar-nav ml-auto">
                 <li>
                     <a href="{{ route('carts') }}" class="nav-link">
-                        <i class="fa fa-cart-plus"></i><span class="badge bg-danger">
+                        <i class="fa fa-cart-plus mx-1"></i>
+                        <span class="badge bg-danger">
                             {{ App\Models\Cart::totalItems() }}
                         </span>
                     </a>

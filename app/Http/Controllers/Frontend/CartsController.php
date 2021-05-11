@@ -11,7 +11,7 @@ class CartsController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.cart');
+        return view('frontend.pages.carts');
     }
 
     public function store(Request $request)
@@ -46,6 +46,35 @@ class CartsController extends Controller
         }
 
         session()->flash('success', 'Product added to the cart');
+        return back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cart = Cart::findOrFail($id);
+
+        if (!is_null($cart)) {
+            $cart->product_quantity = $request->product_quantity;
+            $cart->save();
+        } else {
+            return redirect()->route('index');
+        }
+
+        session()->flash('success', 'product quantity updated!');
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $cart = Cart::findOrFail($id);
+
+        if (!is_null($cart)) {
+            $cart->delete();
+        } else {
+            return redirect()->route('carts');
+        }
+
+        session()->flash('success', 'Product deleted from cart successfully!');
         return back();
     }
 }
