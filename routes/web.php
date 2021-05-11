@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CheckoutsController;
 use App\Http\Controllers\Frontend\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\PagesController;
@@ -63,6 +64,12 @@ Route::group(['prefix' => 'carts'], function () {
     Route::post('/store', [CartsController::class, 'store'])->name('carts.store');
     Route::post('/update/{id}', [CartsController::class, 'update'])->name('carts.update');
     Route::post('/delete/{id}', [CartsController::class, 'destroy'])->name('carts.delete');
+});
+
+// Checkout Route
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutsController::class, 'index'])->name('checkouts');
+    Route::post('/store', [CheckoutsController::class, 'store'])->name('checkouts.store');
 });
 
 

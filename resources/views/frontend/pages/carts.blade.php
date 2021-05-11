@@ -84,8 +84,8 @@
                         </table>
 
                         <div class="d-flex justify-content-end">
-                            <a href="" class="btn btn-warning mx-2">Back to products</a>
-                            <a href="" class="btn btn-success">Checkout</a>
+                            <a href="{{ route('products.index') }}" class="btn btn-warning mx-2">Back to products</a>
+                            <a href="{{ route('checkouts') }}" class="btn btn-success">Checkout</a>
                         </div>
                     </div>
                 </div>
