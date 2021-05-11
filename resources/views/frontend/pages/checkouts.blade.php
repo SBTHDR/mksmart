@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container vh-100">
+    <div class="container">
 
         <div class="card">
             <div class="card-header text-danger">
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="form-group row mb-2">
-                        <label for="shipping_address" class="col-form-label text-md-right">{{ __('Shipping Address') }} <span class="text-muted">(Optional)</span> </label>
+                        <label for="shipping_address" class="col-form-label text-md-right">{{ __('Shipping Address') }} <span class="text-muted">(*)</span> </label>
 
                         <div class="">
                             <textarea id="shipping_address" class="form-control @error('shipping_address') is-invalid @enderror" name="shipping_address" autocomplete="shipping_address">{{ Auth::check() ? Auth::user()->shipping_address : '' }}</textarea>
@@ -106,6 +106,21 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label for="payment_method" class="col-form-label text-md-right">{{ __('Payment Method') }}  <span class="text-muted">(*)</span> </label>
+
+                        <div>
+
+                            <select name="payment_method_id" id="payment_method" class="form-control">
+                                <option value="">Please select a payment method</option>
+                                @foreach($payments as $payment)
+                                    <option value="{{ $payment->id }}">{{ $payment->name }}</option>
+                                @endforeach
+                            </select>
+
                         </div>
                     </div>
 
