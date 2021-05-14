@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('name');
             $table->string('phone_no');
             $table->string('shipping_address');
@@ -26,7 +27,10 @@ class CreateOrdersTable extends Migration
             $table->string('is_completed')->default(0);
             $table->string('is_seen_by_admin')->default(0);
 
+            $table->string('transaction_id')->nullable();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }

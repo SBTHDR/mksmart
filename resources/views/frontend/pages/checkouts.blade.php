@@ -50,7 +50,7 @@
             </div>
             <div class="card-body">
 
-                <form method="POST" action="{{ route('user.profile.update') }}">
+                <form method="POST" action="{{ route('checkouts.store') }}">
                     @csrf
 
                     <div class="form-group row mb-2">
@@ -110,6 +110,22 @@
                     </div>
 
                     <div class="form-group row mb-2">
+                        <label for="message" class="col-form-label text-md-right">{{ __('Message') }} <span class="text-muted">(Optional)</span> </label>
+
+                        <div class="">
+                            <textarea id="message" class="form-control @error('message') is-invalid @enderror" name="message" autocomplete="message">
+
+                            </textarea>
+
+                            @error('message')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
                         <label for="payment_method" class="col-form-label text-md-right">{{ __('Payment Method') }}  <span class="text-muted">(*)</span> </label>
 
                         <div>
@@ -149,11 +165,12 @@
                                         <div class="alert alert-success">
                                             <strong>Send money to the above A/C No. after that give the transaction id bellow, and </strong> click Confirm Order button to complete payment
                                         </div>
-                                        <input type="text" name="transaction_id" class="form-control" placeholder="Enter transaction id">
+
                                     </div>
                                 @endif
 
                             @endforeach
+                            <input type="text" name="transaction_id" id="transaction_id" class="form-control hidden" placeholder="Enter transaction id">
 
 
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
@@ -169,10 +186,12 @@
                                         $("#payment_bkash").removeClass('hidden');
                                         $("#payment_cash_on_delivery").addClass('hidden');
                                         $("#payment_rocket").addClass('hidden');
+                                        $("#transaction_id").removeClass('hidden');
                                     }else if($payment_method === "rocket") {
                                         $("#payment_rocket").removeClass('hidden');
                                         $("#payment_cash_on_delivery").addClass('hidden');
                                         $("#payment_bkash").addClass('hidden');
+                                        $("#transaction_id").removeClass('hidden');
                                     }
                                 })
                             </script>

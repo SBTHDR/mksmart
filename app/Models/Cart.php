@@ -34,17 +34,34 @@ class Cart extends Model
     }
 
     /**
+     * Total cart
+     * @return int
+     */
+    public static function totalCarts()
+    {
+        if (Auth::check()) {
+            $carts = Cart::where('user_id', Auth::id())
+                ->where('order_id', NULL)
+                ->get();
+        } else {
+            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
+        }
+
+        return $carts;
+    }
+
+    /**
      * Total cart items
      * @return int
      */
     public static function totalItems()
     {
         if (Auth::check()) {
-            $carts = Cart::orWhere('user_id', Auth::id())
-                ->orWhere('ip_address', request()->ip())
+            $carts = Cart::where('user_id', Auth::id())
+                ->where('order_id', NULL)
                 ->get();
         } else {
-            $carts = Cart::orWhere('ip_address', request()->ip())->get();
+            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
         }
 
         $total_item = 0;
@@ -55,23 +72,6 @@ class Cart extends Model
 
         return $total_item;
 
-    }
-
-    /**
-     * Total cart
-     * @return int
-     */
-    public static function totalCarts()
-    {
-        if (Auth::check()) {
-            $carts = Cart::orWhere('user_id', Auth::id())
-                ->orWhere('ip_address', request()->ip())
-                ->get();
-        } else {
-            $carts = Cart::orWhere('ip_address', request()->ip())->get();
-        }
-
-        return $carts;
     }
 
 }
