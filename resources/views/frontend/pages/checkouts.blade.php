@@ -133,6 +133,11 @@
                                     </div>
                                 @else
                                     <div id="payment_{{ $payment->short_name }}" class="hidden mb-2">
+                                      @if ($payment->short_name === 'bkash')
+                                        <img src="{!! asset('images/payment/bkash.png') !!}" alt="">
+                                      @elseif ($payment->short_name === 'rocket')
+                                        <img src="{!! asset('images/payment/rocket.png') !!}" alt="">
+                                      @endif
                                         <div class="border border-secondary p-2 mb-2">
                                             <h3>{{ $payment->name }} Payment Details</h3>
                                             <p>
