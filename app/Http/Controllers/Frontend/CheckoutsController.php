@@ -52,8 +52,8 @@ class CheckoutsController extends Controller
         $order->phone_no = $request->phone_no;
         $order->shipping_address = $request->shipping_address;
         $order->message = $request->message;
-        $order->transaction_id = $request->transaction_id;
         $order->ip_address = request()->ip();
+        $order->transaction_id = $request->transaction_id;
         if (Auth::check()) {
           $order->user_id = Auth::id();
         }

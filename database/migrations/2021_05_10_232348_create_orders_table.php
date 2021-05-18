@@ -19,14 +19,13 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('name');
             $table->string('phone_no');
-            $table->string('shipping_address');
+            $table->text('shipping_address');
             $table->string('email')->nullable();
             $table->string('ip_address')->nullable();
-            $table->string('message')->nullable();
-            $table->string('is_paid')->default(0);
-            $table->string('is_completed')->default(0);
-            $table->string('is_seen_by_admin')->default(0);
-
+            $table->text('message')->nullable();
+            $table->boolean('is_paid')->default(0);
+            $table->boolean('is_completed')->default(0);
+            $table->boolean('is_seen_by_admin')->default(0);
             $table->string('transaction_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

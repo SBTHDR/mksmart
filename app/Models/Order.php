@@ -11,6 +11,7 @@ class Order extends Model
 
     public $fillable = [
         'user_id',
+        'payment_id',
         'name',
         'phone_no',
         'shipping_address',
@@ -19,7 +20,8 @@ class Order extends Model
         'message',
         'is_paid',
         'is_completed',
-        'is_seen_by_admin'
+        'is_seen_by_admin',
+        'transaction_id',
     ];
 
     public function user()

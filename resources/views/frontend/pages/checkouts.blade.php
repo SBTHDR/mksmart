@@ -33,9 +33,9 @@
                     <p>
                         Total price: <strong>{{ $total_price }} টাকা</strong>
                     </p>
-                    <p class="text-danger">
+                    {{-- <p class="text-danger">
                         Total price with shipping cost: <strong>{{ $total_price + App\Models\Setting::first()->shipping_cost }} টাকা</strong>
-                    </p>
+                    </p> --}}
                 </div>
 
             </div>
@@ -177,7 +177,6 @@
                             <script type="text/javascript">
                                 $("#payment_method_id").change(function () {
                                     $payment_method = $("#payment_method_id").val();
-
                                     if ($payment_method === "cash_on_delivery") {
                                         $("#payment_cash_on_delivery").removeClass('hidden');
                                         $("#payment_bkash").addClass('hidden');

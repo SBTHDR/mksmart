@@ -37,41 +37,41 @@ class Cart extends Model
      * Total cart
      * @return int
      */
-    public static function totalCarts()
-    {
-        if (Auth::check()) {
-            $carts = Cart::where('user_id', Auth::id())
-                ->where('order_id', NULL)
-                ->get();
-        } else {
-            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
-        }
+     public static function totalCarts()
+     {
+         if (Auth::check()) {
+             $carts = Cart::where('user_id', Auth::id())
+                 ->where('order_id', NULL)
+                 ->get();
+         } else {
+             $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
+         }
 
-        return $carts;
-    }
+         return $carts;
+     }
 
     /**
      * Total cart items
      * @return int
      */
-    public static function totalItems()
-    {
-        if (Auth::check()) {
-            $carts = Cart::where('user_id', Auth::id())
-                ->where('order_id', NULL)
-                ->get();
-        } else {
-            $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
-        }
+     public static function totalItems()
+     {
+         if (Auth::check()) {
+             $carts = Cart::where('user_id', Auth::id())
+                 ->where('order_id', NULL)
+                 ->get();
+         } else {
+             $carts = Cart::where('ip_address', request()->ip())->where('order_id', NULL)->get();
+         }
 
-        $total_item = 0;
+         $total_item = 0;
 
-        foreach ($carts as $cart) {
-            $total_item += $cart->product_quantity;
-        }
+         foreach ($carts as $cart) {
+             $total_item += $cart->product_quantity;
+         }
 
-        return $total_item;
+         return $total_item;
 
-    }
+     }
 
 }
