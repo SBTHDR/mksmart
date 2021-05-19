@@ -32,7 +32,7 @@
                 <li>
                     <a href="{{ route('carts') }}" class="nav-link">
                         <i class="fa fa-cart-plus mx-1"></i>
-                        <span class="badge bg-danger">
+                        <span class="badge bg-danger" id="totalItems">
                             {{ App\Models\Cart::totalItems() }}
                         </span>
                     </a>

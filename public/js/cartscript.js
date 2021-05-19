@@ -9,6 +9,9 @@ function addToCart(product_id) {
           product_id: product_id
         })
           .done(function( data ) {
-              console.log(data);
+            data = JSON.parse(data);
+            if (data.status === 'success') {
+              $("#totalItems").html(data.totalItems);
+            }
   });
 }
