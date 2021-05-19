@@ -52,7 +52,12 @@
                       </div>
                         <p class="card-text">{{ $product->quantity < 1 ? 'Out of stock!' : $product->quantity . ' items in stock' }}</p>
                       <div class="">
-                        <a href="#" class="btn btn-outline-warning">Add to cart</a>
+                        <form class="form-inline" action="{{ route('carts.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            {{-- using jQuery --}}
+                            <button type="button" onclick="addToCart({{ $product->id }})" class="btn btn-outline-warning"><i class="fa fa-plus"> Add to Cart</i></button>
+                        </form>
                       </div>
                     </div>
                 </div>

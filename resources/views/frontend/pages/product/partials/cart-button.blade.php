@@ -2,4 +2,6 @@
     @csrf
     <input type="hidden" name="product_id" value="{{ $product->id }}">
     <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-plus"> Add to Cart</i></button>
+    {{-- using jQuery --}}
+    {{-- <button type="button" onclick="addToCart({{ $product->id }})" class="btn btn-warning btn-sm"><i class="fa fa-plus"> Add to Cart</i></button> --}}
 </form>
