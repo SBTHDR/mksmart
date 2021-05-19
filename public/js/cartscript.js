@@ -11,6 +11,8 @@ function addToCart(product_id) {
           .done(function( data ) {
             data = JSON.parse(data);
             if (data.status === 'success') {
+              alertify.set('notifier','position', 'top-right');
+              alertify.success('Item added to cart successfully!');
               $("#totalItems").html(data.totalItems);
             }
   });

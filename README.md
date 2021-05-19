@@ -13,6 +13,7 @@ Backend system provide a complete management of products by category CRUD.
 - Bootstrap 4
 - Font Awesome 5
 - Intervention Image
+- alertify js
 
 ## Features
 
